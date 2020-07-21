@@ -2,6 +2,8 @@
 
 The User Registry Jumper is a tool (based on C#) to jump into specific user registry hives.
 
+![Preview User Registry Jumper](UserRegistryJumper.png)
+
 ## Requirements
 
 * Windows-based system
@@ -20,6 +22,11 @@ Software\Microsoft\Internet Explorer\Desktop\General (Note: Wallpaper source)
 
 The "." bookmark is a special one which points directly to the root of the selected user.  
 It is possible to add notes to the bookmarks. The important syntax is write your note into ( ).
+
+## Troubleshooting
+
+I tried to write useful error messages. I used the `Debug.WriteLine` which implements OutputDebugString.  
+[Debug View](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview) is a very good tool to read these messages.
 
 ## Issues / Question / Suggestions for improvement
 
