@@ -21,7 +21,7 @@ Software\Microsoft\Internet Explorer\Desktop\General (Note: Wallpaper source)
 ```
 
 The "." bookmark is a special one which points directly to the root of the selected user.  
-It is possible to add notes to the bookmarks. The important syntax is write your note into ( ).
+It is possible to add notes to the bookmarks. The important syntax is to write your note into ( ).
 
 ## Troubleshooting
 

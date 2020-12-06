@@ -11,7 +11,7 @@ namespace UserRegistryJumper
         public static ObservableCollection<String> GetUsers()
         {
 
-            // Enumerate all users
+            // Enumerate all users from the %HOMEDRIVE%\Users
             string[] subdirs = Directory.GetDirectories(Path.GetPathRoot(Environment.SystemDirectory) + "Users")
                             .Select(Path.GetFileName)
                             .ToArray();
@@ -25,11 +25,14 @@ namespace UserRegistryJumper
             //If its not - remove the user. 
             foreach (string user in usersListLoop)
             {
+                HelperMethods.DebugOut("Found user: " + user)
                 if(HelperMethods.getSid(user) == "notfound")
                 {
+                    HelperMethods.DebugOut("User: " + user + " doesn't exist");
                     usersList.Remove(user); 
                 }
             }
+
             return usersList; 
         }
 
@@ -42,7 +45,9 @@ namespace UserRegistryJumper
                 var lines = File.ReadLines("registryhives.txt");
                 foreach (var line in lines)
                 {
+                    HelperMethods.DebugOut("Trying to add: " + line); 
                     registryList.Add(line);
+                    HelperMethods.DebugOut("Added the line: " + line); 
                 }
             }
             catch (Exception e)
@@ -58,7 +63,7 @@ namespace UserRegistryJumper
             //retrieve the SID 
             var usernameSid = HelperMethods.getSid(username);
 
-            //remove everything after "(" - at least try it
+            //remove everything after "("
             try
             {
                 registry = registry.Substring(0,registry.LastIndexOf('(') -1);
@@ -75,15 +80,12 @@ namespace UserRegistryJumper
             string registryUsed = ""; 
 
             //deal with the special "."
-            if (registry == ".")
-            {
-                registry = ""; 
-            }
-            else
+            if (!(registry == "."))
             {
                 //need to add the "\" - otherwise it won't work
                 registryUsed += "\\" + registry; 
             }
+            //build the new path
             string RegValue = "HKEY_USERS\\" + usernameSid + registryUsed;
 
             //set the new value
